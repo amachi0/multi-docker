@@ -3,19 +3,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t amachi0/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t amachi/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run amachi0/react-test npm test -- --coverage
+  - docker run amachi/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t amachi0/multi-client ./client
-  - docker build -t amachi0/multi-nginx ./nginx
-  - docker build -t amachi0/multi-server ./server
-  - docker build -t amachi0/multi-worker ./worker
+  - docker build -t amachi/multi-client ./client
+  - docker build -t amachi/multi-nginx ./nginx
+  - docker build -t amachi/multi-server ./server
+  - docker build -t amachi/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push amachi0/multi-client
-  - docker push amachi0/multi-nginx
-  - docker push amachi0/multi-server
-  - docker push amachi0/multi-worker
+  - docker push amachi/multi-client
+  - docker push amachi/multi-nginx
+  - docker push amachi/multi-server
+  - docker push amachi/multi-worker
